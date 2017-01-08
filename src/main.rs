@@ -34,9 +34,11 @@ fn write_val(pin: usize, value: usize) -> Result<(), io::Error> {
 
 fn read_val(pin: usize) -> Result<bool, io::Error> {
     let mut file = try!{File::open(format!("/sys/class/gpio/gpio{}/value", pin))};
-    let mut buf = { 0 };
-    Ok(match try!{file.read(&mut buf)} {
-        '0' as u8 => false,
+    let mut buf = [ 0x00 ];
+    let val = try!{file.read(&mut buf)};
+    println!("{:?}", val);
+    Ok(match val {
+        0x30 => false,
         _ => true
     })
 }
@@ -52,10 +54,9 @@ fn main() {
         Err(e) => println!("{:?}", e)
     }
     set_out(27, false).unwrap();
-    loop {
-        println!("bing");
+    for i in 0..100 {
+//        println!("bing");
         if read_val(27).unwrap() {
-            break
         }
         sleep(Duration::from_millis(100));
 

@@ -2,3 +2,9 @@
 name = "midirec"
 version = "0.1.0"
 authors = ["Mitchell Bruckner <mbruckner807@gmail.com>"]
+
+[dependencies]
+toml = "0.2"
+rustc-serialize = "0.3"
+libc = "0.2"
+time = "0.1"

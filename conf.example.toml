@@ -1,0 +1,4 @@
+trigger_pin = 27
+light_pin = 17
+midi_port = "16:0"
+output_dir = "/home/alarm/midi"
